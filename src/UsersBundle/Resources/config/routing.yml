@@ -1,0 +1,7 @@
+users_login:
+    path:     /
+    defaults: { _controller: UsersBundle:Users:index }
+
+users_home:
+    path: /home
+    defaults: { _controller: UsersBundle:Users:home }

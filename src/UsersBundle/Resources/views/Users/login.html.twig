@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Userstest</title>
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{asset('bundles/users/libs/css/bootstrap.min.css')}}">
+            <link rel="stylesheet" href="{{asset('bundles/users/libs/css/bootstrap-theme.min.css')}}">
+            <link rel="stylesheet" href="{{asset('bundles/users/css/globalProject.css')}}" />
+            <link rel="stylesheet" href="{{asset('bundles/users/css/login.css')}}" />
+        {% endblock %}
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row">
+                <div id="logo-container"></div>
+                <div class="Absolute-Center is-Responsive">
+                    <div class="col-sm-12 col-md-10 col-md-offset-1">
+                        <form id="loginForm" method="POST" action="{{ path('security_login_check') }}">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input class="form-control" type="text" name='_username' placeholder="Identifiant" value="{% if last_username is defined and last_username is not empty %} {{ last_username }} {% endif %}" />
+                            </div>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input class="form-control" type="password" name='_password' placeholder="Mot de passe" value="" />
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Se souvenir de moi </input>
+                                </label>
+                            </div>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                            <div class="form-group">
+                                <button type="submit" class="buttonDeco bigButton">Connexion</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="loginError">
+                        {% if error is defined and error is not null %}
+                            {{ error.messageKey|trans(error.messageData) }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
